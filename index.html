@@ -13,6 +13,7 @@
 		
 		<script src="_components/jquery/jquery.min.js"></script>
 		<script src="_components/jquery-syntax/jquery.syntax.min.js"></script>
+		<script src="_components/mermaid/mermaid.min.js"></script>
 		
 		<script src="_static/links.js"></script>
 		
@@ -21,6 +22,12 @@
 			jQuery(function($) {
 				$.syntax();
 			});
+			
+			let isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+			let config = {theme: 'light'};
+			if (isDarkMode) config.theme = 'dark';
+			else config.theme = 'forest';
+			mermaid.initialize(config);
 		//]]>
 		</script>
 	</head>
@@ -30,7 +37,7 @@
 		
 		<main>
 			
-	<h1 style="text-align: center"><object type="image/svg+xml" data="logo.svg"></object></h1><p>Async is a composable asynchronous I/O framework for Ruby based on <a href="https://github.com/socketry/nio4r">nio4r</a> and <a href="https://github.com/socketry/timers">timers</a>.</p>
+	<h1 style="text-align: center"><object type="image/svg+xml" data="logo.svg"></object></h1><p>Async is a composable asynchronous I/O framework for Ruby based on <a href="https://github.com/socketry/io-event">io-event</a> and <a href="https://github.com/socketry/timers">timers</a>.</p>
 <blockquote>
 <p>&quot;Lately I've been looking into <code>async</code>, as one of my projects – <a href="https://github.com/janko/tus-ruby-server">tus-ruby-server</a> – would really benefit from non-blocking I/O. It's really beautifully designed.&quot; <em>– <a href="https://github.com/janko">janko</a></em></p>
 </blockquote>
