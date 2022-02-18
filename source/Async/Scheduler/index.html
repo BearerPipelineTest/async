@@ -386,7 +386,7 @@ and this method will return.</p>
 	# Console.logger.debug &quot;Initial execution of task #{fiber} complete (#{result} -&gt; #{fiber.alive?})...&quot;
 	return task
 end</code></pre>
-					</details></section><section id="Async::Scheduler#timeout_after"><h3><code class="language-ruby">def timeout_after(timeout, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)</code></h3><p>Invoke the block, but after the specified timeout, raise <a href="../TimeoutError/index.html" title="TimeoutError"><code class="language-ruby">class Async::TimeoutError</code></a> in any currenly blocking operation. If the block runs to completion before the timeout occurs or there are no non-blocking operations after the timeout expires, the code will complete without any exception.</p>
+					</details></section><section id="Async::Scheduler#with_timeout"><h3><code class="language-ruby">def with_timeout(duration, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)</code></h3><p>Invoke the block, but after the specified timeout, raise <a href="../TimeoutError/index.html" title="TimeoutError"><code class="language-ruby">class Async::TimeoutError</code></a> in any currenly blocking operation. If the block runs to completion before the timeout occurs or there are no non-blocking operations after the timeout expires, the code will complete without any exception.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
@@ -395,10 +395,10 @@ end</code></pre>
 </details>
 <details>
 						<summary><h4>Implementation</h4></summary>
-						<pre><code class="language-ruby">def timeout_after(timeout, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)
+						<pre><code class="language-ruby">def with_timeout(duration, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)
 	fiber = Fiber.current
 	
-	timer = @timers.after(timeout) do
+	timer = @timers.after(duration) do
 		if fiber.alive?
 			fiber.raise(exception, message)
 		end

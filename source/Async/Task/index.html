@@ -111,21 +111,11 @@ end</code></pre>
 						<pre><code class="language-ruby">def sleep(duration = nil)
 	super
 end</code></pre>
-					</details></section><section id="Async::Task#with_timeout"><h3><code class="language-ruby">def with_timeout(timeout, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)</code></h3><ul class="pragmas ">
-		<li class="pragma deprecated" title="Replaced by {Scheduler#timeout_after}.">
-			deprecated
-		</li>
-</ul>
-<details open>
-	<summary><h4>Signature</h4></summary>
-	<dl><dt>
-					<strong>deprecated</strong></dt><dd><p>Replaced by <a href="../Scheduler/index.html#Async%3A%3AScheduler%23timeout_after" title="Scheduler#timeout_after"><code class="language-ruby">Async::Scheduler#timeout_after</code></a>.</p>
-</dd></dl>
-</details>
+					</details></section><section id="Async::Task#with_timeout"><h3><code class="language-ruby">def with_timeout(duration, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)</code></h3><p>Execute the given block of code, raising the specified exception if it exceeds the given duration during a non-blocking operation.</p>
 <details>
 						<summary><h4>Implementation</h4></summary>
-						<pre><code class="language-ruby">def with_timeout(timeout, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)
-	Fiber.scheduler.timeout_after(timeout, exception, message, &amp;block)
+						<pre><code class="language-ruby">def with_timeout(duration, exception = TimeoutError, message = &quot;execution expired&quot;, &amp;block)
+	Fiber.scheduler.with_timeout(duration, exception, message, &amp;block)
 end</code></pre>
 					</details></section><section id="Async::Task#fiber"><h3><code class="language-ruby">attr :fiber</code></h3></section><section id="Async::Task#status"><h3><code class="language-ruby">attr :status</code></h3></section><section id="Async::Task#run"><h3><code class="language-ruby">def run(*arguments)</code></h3><p>Begin the execution of the task.</p>
 <details>
